@@ -7,7 +7,6 @@ pipeline {
                    args  '-d  --name app -P -p 18888:8080'
                    }
            }
-    agent any
         stages {
                    stage('部署') {
                        agent { docker 'maven:3-alpine' }
