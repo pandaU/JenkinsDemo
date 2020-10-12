@@ -5,15 +5,17 @@ pipeline {
                    stage('编译') {
                        agent { docker 'maven:3-alpine' }
                        steps {
-                           echo 'Hello, Maven'
+                           echo '删除app镜像'
+                           sh  'docker rmi app '
+                           echo '编译文件'
                            sh 'mvn clean package -Dmaven.test.skip=true'
                        }
                    }
-                   stage('Example Test') {
-                       agent { docker 'openjdk:8-jre' }
+                   stage('部署') {
+                       agent any
                        steps {
-                           echo 'Hello, JDK'
-                           sh 'java -version'
+                           echo '启动app镜像'
+                           sh  'docker run -d  --name app -P -p 18888:8080 app'
                        }
                    }
         }
