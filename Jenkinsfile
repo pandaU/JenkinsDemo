@@ -1,6 +1,18 @@
 pipeline {
     /* insert Declarative Pipeline here */
-    agent none
+    agent {
+        docker {
+            image 'maven:3-alpine'
+            label 'my-defined-label'
+            args  '-v /tmp:/tmp'
+        }
+        dockerfile {
+                filename 'Dockerfile.build'
+                dir 'build'
+                label 'my-defined-label'
+                additionalBuildArgs  '--build-arg version=1.0.2'
+            }
+    }
         stages {
                    stage('Example Build') {
                        agent { docker 'maven:3-alpine' }
