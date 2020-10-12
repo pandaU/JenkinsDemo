@@ -6,7 +6,6 @@ pipeline {
                                                   agent any
                                                   steps {
                                                       echo '停止app镜像'
-                                                      sh  'docker stop app'
                                                       sh  'docker rmi app'
                                                   }
                      }
