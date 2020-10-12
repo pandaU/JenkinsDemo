@@ -2,11 +2,11 @@ pipeline {
     /* insert Declarative Pipeline here */
     agent any
         stages {
-                   stage('Example Build') {
+                   stage('编译') {
                        agent { docker 'maven:3-alpine' }
                        steps {
                            echo 'Hello, Maven'
-                           sh 'mvn --version'
+                           sh 'mvn clean package -Dmaven.test.skip=true'
                        }
                    }
                    stage('Example Test') {
