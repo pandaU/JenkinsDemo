@@ -5,14 +5,7 @@ pipeline {
                    stage('清理') {
                                                   agent any
                                                   steps {
-                                                    sh 'for i in $(docker ps -a | awk '{ print $2}' | tail -n +2)
-                                                      do
-                                                         if test $i -eq "app"
-                                                         then
-                                                             sh 'docker rm -f app'
-                                                         fi
-                                                      done
-                                                      '
+                                                      sh 'docker  rm -f app'
                                                       echo '停止app镜像'
                                                       sh  'docker rmi app'
                                                   }
