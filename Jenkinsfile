@@ -7,7 +7,7 @@ pipeline {
                                                   steps {
                                                       sh 'for i in $(docker ps -a | awk "{ print $2}" | tail -n +2);do if [ $i = "app" ];then docker rm -f app;fi;done;'
                                                       echo '停止app镜像'
-                                                      sh  'docker rmi app'
+                                                      //sh  'docker rmi app'
                                                   }
                      }
                    stage('编译') {
