@@ -22,12 +22,29 @@ pipeline {
                                           steps {
                                               echo '登录仓库'
                                               sh  'docker login -u pandau -p xiong1314229'
-                                              ehco 'docker push 镜像'
+                                              echo 'docker push 镜像'
                                               sh  'docker push pandau/app:latest'
                                               echo '部署'
                                               sh 'docker run -d  --name app -P -p 18888:8080 app'
                                           }
                                       }
         }
-
+        post {
+                        always {
+                            echo 'One way or another, I have finished'
+                            deleteDir() /* clean up our workspace */
+                        }
+                        success {
+                            echo 'I succeeeded!'
+                        }
+                        unstable {
+                            echo 'I am unstable :/'
+                        }
+                        failure {
+                            echo 'I failed :('
+                        }
+                        changed {
+                            echo 'Things were different before...'
+                        }
+                    }
 }
