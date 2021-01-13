@@ -25,6 +25,8 @@ pipeline {
                                               sh  'docker login -u pandau -p xiong1314229'
                                               echo 'docker push 镜像'
                                               sh  'docker push pandau/app:latest'
+                                              echo 'pull 仓库镜像'
+                                              sh  'docker pull pandau/app:latest'
                                               echo '部署'
                                               sh 'docker run -d  --name app -P -p 18888:8080 pandau/app'
                                           }
