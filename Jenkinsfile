@@ -8,7 +8,8 @@ pipeline {
                                                       echo '停止app容器'
                                                       sh 'if [ $(docker ps -a -q -f"name=app") ];then docker rm -f app;fi;'
                                                       echo '删除app镜像'
-                                                      sh  'docker rmi pandau/app'
+                                                      /*sh  'docker rmi pandau/app'*/
+                                                      sh 'if [ $(docker images pandau/app -q) ];then docker rmi pandau/app;fi;'
                                                   }
                      }
                    stage('编译') {
