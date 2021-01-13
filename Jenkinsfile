@@ -13,9 +13,10 @@ pipeline {
                                                   }
                      }
                    stage('编译') {
-                       agent { docker 'maven:3-alpine' }
+                       agent any
                        steps {
                            echo '编译文件'
+                           sh 'mvn -v'
                            sh 'mvn clean package -Dmaven.test.skip=true'
                        }
                    }
